@@ -1,2 +1,7 @@
 - status line
 - sidebar
+- sort
+- perso tags
+- source manager
+- autocompletion
+- ~/.dzbugs/
