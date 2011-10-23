@@ -4,13 +4,11 @@
 
 require("coffee-script");
 var notify = require("./lib/notifications.js");
-var bz = require("bz")
+var bz = require("bz");
 var BugStore = require("./lib/bugstore.js").BugStore;
-var printers = require("./lib/printers.js");
 var formater = require("./lib/format.js").formater;
 var layout = require("./lib/layout.js").layout;
-
-console.log(layout);
+var keys = require("./lib/keys.js").keys;
 
 /* Init store */
 
@@ -18,35 +16,16 @@ var store = new BugStore(layout);
 layout.init(store, formater);
 store.load("/tmp/dzbugs.data");
 
+keys.init(layout);
+
 return;
 
-//var bugsIds = [669658, 653545, 663778, 672003, 672006, 683873];
+
+var bugsIds = "566092 650804 653545 663778 663852 663902 665933 666250 672003 672006 674887 683662 683873 683954 689939 689946 691712 692466 694019 694954 694956 694958 696015 696139 642471 650794 663781 663831 663833 663858 663898 664436 665421 665539 665880 665907 666249 666650 668254 669652 669656 669658 671689 672002 672902 674871 683906 690068".split(" ");
 
 var bugzilla = bz.createClient();
 fetchBugsFromBugzilla(bugsIds, function() {
   store.save("/tmp/dzbugs.data");
-  return;
-  var line = 0;
-  for (var i in bugsIds) {
-    var bug = store.getBug(bugsIds[i]);
-    T.pos(0, line);
-    T.out(f.start(bug));
-    var end = f.end(bug);
-
-    var offset = col - end.length;
-    if (offset > 0) {
-      T.pos(offset, line);
-      T.out(end);
-    }
-
-    line++;
-
-    /*
-    T.pos(5,5).fg(T.C.w).bg(T.C.r).out("Hello, world!")
-    T.pos(0, 0).fg(T.C.r).bg(T.C.x).out(T.SYM.check + " ");
-    */
-
-  }
 });
 
 function fetchBugsFromBugzilla(aBugs, aOnComplete) {
