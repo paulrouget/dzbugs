@@ -4,7 +4,9 @@ require("coffee-script");
 var notify = require("./lib/notifications.js");
 
 var DZ = {
-  formater: require("./lib/format.js"),
+  formater: require("./etc/format.js"),
+  sorters: require("./lib/sorters.js"),
+  conf: require("./etc/conf.js"),
   term: require("node-term-ui").TermUI,
   layout: require("./lib/layout.js"),
   store: require("./lib/bugstore.js"),
@@ -15,11 +17,13 @@ var DZ = {
   error: notify.error,
 }
 
+
 notify.init(DZ);
+DZ.sorters.init(DZ);
 DZ.cmd.init(DZ);
 DZ.store.init(DZ);
 DZ.keys.init(DZ);
 DZ.bz.init(DZ);
 DZ.layout.init(DZ);
 
-DZ.store.load("/tmp/dzbugs.data");
+//DZ.store.load("/tmp/dzbugs.data");

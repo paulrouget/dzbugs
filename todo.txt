@@ -1,6 +1,6 @@
 - status line
 - sidebar
-- sort
+- sorter / filters
 - perso tags
 - source manager
 - autocompletion
