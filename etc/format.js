@@ -4,26 +4,43 @@ var formater = {
     var str = "";
     var b = bug.src.bz.data;
 
-    if ((b.status == "RESOLVED" || b.status == "VERIFIED") && !current) {
+    if (current) {
+      str += bg(235);
+    }
+
+    if (b.status == "RESOLVED" || b.status == "VERIFIED") {
       str += fg(238);
       str += fw(idx + 1, 3, " ", true) + " " + (current? ">" : " ");
       str += '[' + fw(b.id, 6, " ", true) + '] ';
       str += fw(b.status, 8) + " ";
       str += " " + b.summary;
     } else {
-      var bgd = current ? bg(234):"";
-      str = bgd + fw(idx + 1, 3, " ", true) + " " + (current? ">" : " ");
+      str += fw(idx + 1, 3, " ", true) + " " + (current? ">" : " ");
       str += fg(28) + '[' + fw(b.id, 6, " ", true) + '] ';
-      str += fg(220) + fw(b.status, 8) + " " + bgr() + fgr();
-      str += " " + b.summary.replace("[", fg(199) + "[").replace("]", "]" + fgr());
+      str += fg(220) + fw(b.status, 8) + " " + fgr();
+      str += " " + b.summary.replace("[", fg(199) + "[", "g").replace("]", "]" + fgr(), "g");
     }
 
     return str;
   },
   end: function(bug, current, idx, special) {
     var b = bug.src.bz.data;
-    return b.last_change_time + " " + (b.priority == "--" ? "  ":b.priority) + " " + fg(239) + " http://bugzil.la/" + b.id + " ";
+    var l = bug.src.local.data;
+    return tags(l) + " " + fg(239) + " http://bugzil.la/" + b.id + " ";
   },
+}
+
+function tags(l) {
+  var str = " ";
+  var addComma = false;
+  if (l.tags) {
+    for (var i = 0; i < l.tags.length; i++) {
+      str += (addComma ? ", " : "") + fg(88) + (l.tags[i]);
+      str += fgr();
+      addComma = true;
+    }
+  }
+  return str;
 }
 
 var fw = function fixedWidth(str, max, /* optional */ c, /* optional */ alignRight) {

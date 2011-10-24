@@ -5,3 +5,5 @@
 - source manager
 - autocompletion
 - ~/.dzbugs/
+- confirmation (delete, quit, ...)
+- store tags in array
