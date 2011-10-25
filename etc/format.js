@@ -15,6 +15,13 @@ var formater = {
       str += fw(b.status, 8) + " ";
       str += " " + b.summary;
     } else {
+      var l = bug.src.local.data;
+      if (l.tags && l.tags.indexOf("important") != -1) {
+        str += "!";
+      } else {
+        str += " ";
+      }
+
       str += fw(idx + 1, 3, " ", true) + " " + (current? ">" : " ");
       str += fg(28) + '[' + fw(b.id, 6, " ", true) + '] ';
       str += fg(220) + fw(b.status, 8) + " " + fgr();
