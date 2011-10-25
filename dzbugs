@@ -1,33 +1,21 @@
 #!/usr/bin/env node
-
+require.paths.push(__dirname + '/lib');
+require.paths.push(__dirname + '/etc');
 require("coffee-script");
-var notify = require("./lib/notifications.js");
 
-var DZ = {
-  formater: require("./etc/format.js"),
-  conf: require("./etc/conf.js"),
-  sorters: require("./lib/sorters.js"),
-  local: require("./lib/local.js"),
-  term: require("node-term-ui").TermUI,
-  layout: require("./lib/layout.js"),
-  store: require("./lib/bugstore.js"),
-  keys: require("./lib/keys.js"),
-  commands: require("./lib/commands.js"),
-  commandLine: require("./lib/commandline.js"),
-  bz: require("./lib/bugzilla.js"),
-  log: notify.log,
-  error: notify.error,
-}
+process.title = "dzbugs";
 
+var DZ = {}; global.DZ = DZ;
 
-notify.init(DZ);
-DZ.sorters.init(DZ);
-DZ.local.init(DZ);
-DZ.commandLine.init(DZ);
-DZ.commands.init(DZ);
-DZ.store.init(DZ);
-DZ.keys.init(DZ);
-DZ.bz.init(DZ);
-DZ.layout.init(DZ);
-
-//DZ.store.load("/tmp/dzbugs.data");
+DZ.term = require("node-term-ui").TermUI,
+DZ.log = require("notifications.js").log;
+DZ.error = require("notifications.js").error;
+DZ.formater = require("format.js");
+DZ.conf = require("conf.js");
+DZ.sorters = require("sorters.js");
+DZ.keys = require("keys.js");
+DZ.layout = require("layout.js");
+DZ.commandLine = require("commandline.js");
+DZ.commands = require("commands.js");
+DZ.bz = require("bugzilla.js");
+DZ.store = require("bugstore.js");

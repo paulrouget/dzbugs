@@ -1,2 +1,3 @@
 WIP.
 A command line tool for Bugzilla.
+Needs a 256 colors and UTF8 capable terminal.
