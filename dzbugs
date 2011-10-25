@@ -7,7 +7,7 @@ process.title = "dzbugs";
 
 var DZ = {}; global.DZ = DZ;
 
-DZ.term = require("node-term-ui").TermUI,
+DZ.term = require("node-term-ui"),
 DZ.log = require("notifications.js").log;
 DZ.error = require("notifications.js").error;
 DZ.formater = require("format.js");
