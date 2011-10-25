@@ -1,0 +1,3 @@
+[submodule "node-term-ui"]
+	path = node-term-ui
+	url = git://github.com/jocafa/node-term-ui.git
