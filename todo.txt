@@ -7,3 +7,7 @@
 - ~/.dzbugs/
 - confirmation (delete, quit, ...)
 - store tags in array
+- invert sort
+- redraw on sort/filter
+- scroll doesnt work anymore
+- defrag

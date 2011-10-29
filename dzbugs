@@ -7,15 +7,18 @@ process.title = "dzbugs";
 
 var DZ = {}; global.DZ = DZ;
 
+DZ.utils = require("utils"),
 DZ.term = require("node-term-ui"),
-DZ.log = require("notifications.js").log;
-DZ.error = require("notifications.js").error;
-DZ.formater = require("format.js");
-DZ.conf = require("conf.js");
-DZ.sorters = require("sorters.js");
-DZ.keys = require("keys.js");
-DZ.layout = require("layout.js");
-DZ.commandLine = require("commandline.js");
-DZ.commands = require("commands.js");
-DZ.bz = require("bugzilla.js");
-DZ.store = require("bugstore.js");
+DZ.log = require("notifications").log;
+DZ.error = require("notifications").error;
+DZ.formater = require("format");
+DZ.sorters = require("sorters");
+DZ.filters = require("filters");
+DZ.conf = require("conf");
+DZ.sorters = require("sorters");
+DZ.keys = require("keys");
+DZ.layout = require("layout");
+DZ.commandLine = require("commandline");
+DZ.commands = require("commands");
+DZ.bz = require("bugzilla");
+DZ.store = require("bugstore");

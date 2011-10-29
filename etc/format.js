@@ -1,12 +1,22 @@
-// http://upload.wikimedia.org/wikipedia/commons/9/95/Xterm_color_chart.png
-var formater = {
-  start: function(bug, current, idx, special) {
-    var str = "";
-    var b = bug.src.bz.data;
+// 256 colors: http://upload.wikimedia.org/wikipedia/commons/9/95/Xterm_color_chart.png
 
-    if (current) {
-      str += bg(235);
-    }
+// set foreground color:
+var fg = function setFGColor(value) {return '#{"fg": ' + value + '}';}
+var bg = function setBGColor(value) {return '#{"bg": ' + value + '}';}
+// reset foreground:
+var fgr = function resetFgColor() {return '#{"fgreset": true}';}
+// reset background:
+var bgr = function resetBgColor() {return '#{"bgreset": true}';}
+// fixed width:
+var fw = DZ.utils.fixedWidth;
+
+var formater = {
+  bugStart: function(bug, current, idx) {
+    var str = "";
+    var b = bug.bz;
+
+    if (current) str += bg(235);
+    str += bug.tags.indexOf("important") != -1 ? "!" : " ";
 
     if (b.status == "RESOLVED" || b.status == "VERIFIED") {
       str += fg(238);
@@ -15,13 +25,6 @@ var formater = {
       str += fw(b.status, 8) + " ";
       str += " " + b.summary;
     } else {
-      var l = bug.src.local.data;
-      if (l.tags && l.tags.indexOf("important") != -1) {
-        str += "!";
-      } else {
-        str += " ";
-      }
-
       str += fw(idx + 1, 3, " ", true) + " " + (current? ">" : " ");
       str += fg(28) + '[' + fw(b.id, 6, " ", true) + '] ';
       str += fg(220) + fw(b.status, 8) + " " + fgr();
@@ -30,57 +33,15 @@ var formater = {
 
     return str;
   },
-  end: function(bug, current, idx, special) {
-    var b = bug.src.bz.data;
-    var l = bug.src.local.data;
-    return tags(l) + " " + fg(239) + " http://bugzil.la/" + b.id + " ";
+  bugEnd: function(bug, current, idx) {
+    return fg(288) + bug.tags.join(" ") + " " + fg(239) + " http://bugzil.la/" + bug.id;
   },
-}
-
-function tags(l) {
-  var str = " ";
-  var addComma = false;
-  if (l.tags) {
-    for (var i = 0; i < l.tags.length; i++) {
-      str += (addComma ? ", " : "") + fg(88) + (l.tags[i]);
-      str += fgr();
-      addComma = true;
-    }
-  }
-  return str;
-}
-
-var fw = function fixedWidth(str, max, /* optional */ c, /* optional */ alignRight) {
-  str = "" + str;
-  if (str.length > max) {
-    return str.substr(0, max);
-  } else {
-    if (!c) c = " ";
-    while (str.length < max) {
-      if (alignRight) {
-        str = c + str;
-      } else {
-        str += c;
-      }
-    }
-    return str;
+  statusStart: function() {
+    return bg(88);
+  },
+  statusEnd: function() {
+    return DZ.store.getCount() + "/" + DZ.store.getCountAll();
   }
 }
 
-var fg = function setFGColor(value) {
-  return '#{"fg": ' + value + '}';
-}
-var bg = function setBGColor(value) {
-  return '#{"bg": ' + value + '}';
-}
-var fgr = function resetFgColor() {
-  return '#{"fgreset": true}';
-}
-
-var bgr = function resetBgColor() {
-  return '#{"bgreset": true}';
-}
-
-for (var i in formater) {
-  exports[i] = formater[i];
-}
+module.exports = formater;
