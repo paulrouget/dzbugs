@@ -39,10 +39,11 @@ var formater = {
     return fg(288) + bug.tags.join(" ") + " " + fg(239) + " http://bugzil.la/" + bug.id;
   },
   statusStart: function() {
-    return bg(88);
+    return bg(244) + fg(0);
   },
   statusEnd: function() {
-    return DZ.store.getCount() + "/" + DZ.store.getCountAll();
+    var s = DZ.store;
+    return "[" + s.getFilterName() + "] [" + s.getSorterName() + "]" + (s.reverse ? "@ ": " ") + s.getCount() + "/" + s.getCountAll();
   }
 }
 

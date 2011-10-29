@@ -9,3 +9,5 @@
 - defrag
 - help panel
 - undo?
+- on shortcut, dont pass current bug as argument, it's confusing.
+  Let the command get the current bug.
