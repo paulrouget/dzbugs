@@ -20,13 +20,13 @@ var formater = {
 
     if (b.status == "RESOLVED" || b.status == "VERIFIED") {
       str += fg(238);
-      str += fw(idx + 1, 3, " ", true) + " " + (current? ">" : " ");
+      str += fw(idx + 1, 5, " ", true) + " " + (current? ">" : " ");
       str += '[' + fw(b.id, 6, " ", true) + '] ';
       str += fw(b.status, 8) + " ";
       summary = bug.alias ? bug.alias + "*" : b.summary;
       str += " " + summary;
     } else {
-      str += fw(idx + 1, 3, " ", true) + " " + (current? ">" : " ");
+      str += fw(idx + 1, 5, " ", true) + " " + (current? ">" : " ");
       str += fg(28) + '[' + fw(b.id, 6, " ", true) + '] ';
       str += fg(220) + fw(b.status, 8) + " " + fgr();
       summary = bug.alias ? bug.alias + "*" : b.summary;
@@ -36,7 +36,8 @@ var formater = {
     return str;
   },
   bugEnd: function(bug, current, idx) {
-    return fg(288) + bug.tags.join(" ") + " " + fg(239) + " http://bugzil.la/" + bug.id;
+    return JSON.stringify(bug.bz.cc);
+    //return fg(288) + bug.tags.join(" ") + " " + fg(239) + " http://bugzil.la/" + bug.id;
   },
   statusStart: function() {
     return bg(244) + fg(0);
