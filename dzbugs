@@ -9,6 +9,7 @@ var DZ = {}; global.DZ = DZ;
 
 DZ.utils = require("utils"),
 DZ.term = require("node-term-ui"),
+DZ.pager = require("pager"),
 DZ.log = require("notifications").log;
 DZ.error = require("notifications").error;
 DZ.formater = require("format");

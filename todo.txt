@@ -8,3 +8,4 @@
 - invert sort
 - defrag
 - help panel
+- undo?
