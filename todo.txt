@@ -1,13 +1,10 @@
-- status line
 - sidebar
 - sorter / filters
-- perso tags
+- perso alias
 - source manager
-- autocompletion
 - ~/.dzbugs/
 - confirmation (delete, quit, ...)
-- store tags in array
+- pretty statusbar
 - invert sort
-- redraw on sort/filter
-- scroll doesnt work anymore
 - defrag
+- help panel

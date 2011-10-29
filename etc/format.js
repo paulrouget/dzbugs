@@ -23,12 +23,14 @@ var formater = {
       str += fw(idx + 1, 3, " ", true) + " " + (current? ">" : " ");
       str += '[' + fw(b.id, 6, " ", true) + '] ';
       str += fw(b.status, 8) + " ";
-      str += " " + b.summary;
+      summary = bug.alias ? bug.alias + "*" : b.summary;
+      str += " " + summary;
     } else {
       str += fw(idx + 1, 3, " ", true) + " " + (current? ">" : " ");
       str += fg(28) + '[' + fw(b.id, 6, " ", true) + '] ';
       str += fg(220) + fw(b.status, 8) + " " + fgr();
-      str += " " + b.summary.replace("[", fg(199) + "[", "g").replace("]", "]" + fgr(), "g");
+      summary = bug.alias ? bug.alias + "*" : b.summary;
+      str += " " + summary.replace("[", fg(199) + "[", "g").replace("]", "]" + fgr(), "g"); //FIXME: works just once
     }
 
     return str;
