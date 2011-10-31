@@ -18,6 +18,7 @@ DZ.filters =      require("filters");
 DZ.conf =         require("conf");
 DZ.sorters =      require("sorters");
 DZ.keys =         require("keys");
+DZ.bugpanel =     require("bugpanel");
 DZ.layout =       require("layout");
 DZ.commandLine =  require("commandline");
 DZ.commands =     require("commands");

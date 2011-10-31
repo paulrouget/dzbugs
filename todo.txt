@@ -1,15 +1,20 @@
+- fix all the FIXME
 - sidebar
-- sorter / filters
-- perso alias
-- source manager
 - ~/.dzbugs/
 - confirmation (delete, quit, ...)
 - pretty statusbar
-- invert sort
 - defrag
-- help panel
 - undo?
 - on shortcut, dont pass current bug as argument, it's confusing.
   Let the command get the current bug.
 - search ("/")
 - use countBugs
+- add comment
+- bz.bugHistory
+- bz.countBug
+- use an actual db (nStore or alfred)
+- cascade filters and sorters
+- cache requested bugs
+- show activities, not only comments
+- wrap lines: see bug https://bugzilla.mozilla.org/show_bug.cgi?id=696166
+- only fetch necessary fields
