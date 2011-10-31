@@ -1,3 +1,4 @@
+/*
 DZ.fetcher.addSource({
   tag: "assigned2me",
   query: {
@@ -5,6 +6,7 @@ DZ.fetcher.addSource({
     email1_type: "equals_any",
     email1_assigned_to: "1"
 }});
+*/
 
 /*
 DZ.fetcher.addSource({
@@ -17,5 +19,4 @@ DZ.fetcher.addSource({
   tag: "devtools",
   query: {
     component: "Developer Tools",
-    priority: "P1"
 }});

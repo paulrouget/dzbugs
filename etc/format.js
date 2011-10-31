@@ -33,7 +33,7 @@ var formater = {
     if (b.status == "RESOLVED" || b.status == "VERIFIED") {
       str += fg(238);
       str += fw(idx + 1, 5, " ", true) + " " + (current? "> " : "  ");
-      str += '  [' + fw(b.id, 6, " ", true) + '] ';
+      str += ' [' + fw(b.id, 6, " ", true) + '] ';
       str += fw(b.status, 3) + " ";
       str += " " + summary;
     } else {

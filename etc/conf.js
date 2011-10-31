@@ -1,4 +1,5 @@
 exports.email = "paul@mozilla.com";
+exports.bugzillaDefaultField = "summary,status,id,priority,cc";
 exports.defaultFilter  = "notfixed";
 exports.defaultSorter = "priority";
 exports.bugPanelOffset = 5;
