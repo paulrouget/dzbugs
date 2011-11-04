@@ -11,12 +11,15 @@ var bgr = function resetBgColor() {return '#{"bgreset": true}';}
 var fw = DZ.utils.fixedWidth;
 
 var formater = {
-  bugStart: function(bug, current, idx) {
+  bugStart: function(bug, current, idx, bugPage) {
+    bugPage = !!bugPage;
+
     var str = "";
     var b = bug.bz;
 
     if (current) str += bg(235);
-    str += bug.tags.indexOf("important") != -1 ? "!" : " ";
+    if (!bugPage)
+      str += bug.tags.indexOf("important") != -1 ? "!" : " ";
 
     var priority = bug.bz.priority;
     if (priority == "P1")
@@ -30,16 +33,19 @@ var formater = {
 
     var summary = bug.alias ? bug.alias + "*" : b.summary;
 
-    if (b.status == "RESOLVED" || b.status == "VERIFIED") {
+    if ((b.status == "RESOLVED" || b.status == "VERIFIED") && !bugPage) {
       str += fg(238);
       str += fw(idx + 1, 5, " ", true) + " " + (current? "> " : "  ");
       str += ' [' + fw(b.id, 6, " ", true) + '] ';
-      str += fw(b.status, 3) + " ";
+      str += fw(b.status, 4) + " ";
       str += " " + summary;
     } else {
-      str += fw(idx + 1, 5, " ", true) + " " + (current? "> " : "  ");
-      str += priority + fg(28) + '[' + fw(b.id, 6, " ", true) + '] ';
-      str += fg(220) + fw(b.status, 3) + " " + fgr();
+      if (!bugPage) {
+        str += fw(idx + 1, 5, " ", true) + " " + (current? "> " : "  ");
+        str += priority;
+      }
+      str += fg(28) + '[' + fw(b.id, 6, " ", true) + '] ';
+      str += fg(220) + fw(b.status, 4) + " " + fgr();
       str += " " + summary.replace("[", fg(199) + "[", "g").replace("]", "]" + fgr(), "g"); //FIXME: works just once
     }
 
@@ -58,15 +64,19 @@ var formater = {
 
 
   fullBug: function(dzBug, bzBug, width) {
-    var txt = "", nl = "\n";
+    var txt = nl = "\n";
     var bz = bzBug;
 
     var separator = "";
     for (var i = 1; i < width; i++) separator += "_";
     separator += nl;
 
-    txt += "Bug " + bz.id + " - " + bz.summary + nl;
-    txt += "Status: " + bz.status + nl;
+    txt += this.bugStart(dzBug, false, null, true) + nl;
+    txt += fg(239) + fw("Status:", 15) + fgr() + bz.status + nl;
+    txt += fg(239) + fw("Piority:", 15) + fgr() + bz.priority + nl;
+    txt += fg(239) + fw("whiteboard:", 15) + fgr() + JSON.stringify(bz.whiteboard) + nl;
+    txt += fg(239) + fw("keywords:", 15) + fgr() + bz.keywords + nl;
+    txt += fg(239) + fw("Assigned to:", 15) + fgr() + bz.assigned_to.name + nl;
     txt += "_" + separator;
 
     var comments = bz.comments;

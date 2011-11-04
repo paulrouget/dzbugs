@@ -23,5 +23,6 @@ DZ.layout =       require("layout");
 DZ.commandLine =  require("commandline");
 DZ.commands =     require("commands");
 DZ.store =        require("bugstore");
+DZ.localSearch =  require("localsearch");
 DZ.fetcher =      require("fetcher");
                   require("sources");
